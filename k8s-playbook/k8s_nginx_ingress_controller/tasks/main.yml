@@ -1,0 +1,30 @@
+- name: Check if manifests directory exist
+  stat:
+    path: "/home/{{ admin }}/k8s/nginx_ingress_controller"
+  register: manifests
+
+- name: Make manifest directory
+  file:
+    path: "/home/{{ admin }}/k8s/nginx_ingress_controller"
+    state: directory
+    owner: "{{ admin }}"
+  when: manifests.stat.exists == False
+
+- name: Copy manifest
+  copy:
+    src: k8s_nginx_ingress_controller/manifests/
+    dest: "/home/{{ admin }}/k8s/nginx_ingress_controller"
+    owner: "{{ admin }}"
+  when: manifests.stat.exists == False
+
+- name: Copy templated secret
+  template:
+    src: k8s_traefik_ingress_controller/manifests/auth_file.yaml
+    dest: "/home/{{ admin }}/k8s/nginx_ingress_controller"
+    owner: "{{ admin }}"
+
+- name: Create NGINX Ingress Controller
+  shell: |
+    kubectl apply -f /home/{{ admin }}/k8s/nginx_ingress_controller/namespace.yaml
+    sleep 5
+    kubectl apply -f /home/{{ admin }}/k8s/nginx_ingress_controller/.

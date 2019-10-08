@@ -1,0 +1,12 @@
+---
+- hosts:
+  - master
+  - workers
+  become: true
+  tasks:
+    - import_role:
+        name: docker_engine
+      tags: docker_engine
+    - import_role:
+        name: docker_compose
+      tags: docker_compose

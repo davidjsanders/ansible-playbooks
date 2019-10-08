@@ -1,0 +1,19 @@
+- hosts:
+  - master
+  become: true
+  tasks:
+    - import_role:
+        name: app_nexus_oss
+      tags: app_nexus
+    - import_role:
+        name: app_helm
+      tags: app_helm
+    - import_role:
+        name: app_jenkins
+      tags: app_jenkins
+    - import_role:
+        name: app_postgres
+      tags: app_postgres
+    - import_role:
+        name: app_anchore
+      tags: app_anchore

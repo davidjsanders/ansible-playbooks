@@ -1,0 +1,4 @@
+- import_tasks: checks.yml
+- import_tasks: copy.yml
+- import_tasks: debug.yml
+- import_tasks: anchore.yml

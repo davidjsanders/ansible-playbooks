@@ -1,0 +1,4 @@
+- name: Reboot worker
+  reboot:
+    reboot_timeout: 600
+  when: node_status is failed

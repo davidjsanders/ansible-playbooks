@@ -1,0 +1,3 @@
+- import_tasks: checks.yml
+- import_tasks: debug.yml
+- import_tasks: docker.yml

@@ -1,0 +1,8 @@
+- hosts:
+  - jumpbox
+  - workers
+  become: true
+  tasks:
+    - import_role:
+        name: nfs_client
+      tags: nfs_client
