@@ -1,6 +1,6 @@
 - name: Copy manifest
   copy:
-    src: app_helm/manifests/
+    src: manifests/
     dest: "/home/{{ admin }}/k8s/helm"
     owner: "{{ admin }}"
   when: manifests.stat.exists == False or (force is defined and force | lower == "yes")

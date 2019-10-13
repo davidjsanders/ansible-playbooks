@@ -12,7 +12,7 @@
 
 - name: Copy manifests
   copy:
-    src: k8s_nfs_provisioner/manifests/
+    src: manifests/
     dest: "/home/{{ admin }}/k8s/nfs_provisioner"
     owner: "{{ admin }}"
 

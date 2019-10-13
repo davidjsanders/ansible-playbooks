@@ -5,20 +5,20 @@
 
 - name: Copy manifest
   copy:
-    src: k8s_letsencrypt/manifests/
+    src: manifests/
     dest: "/home/{{ admin }}/k8s/letsencrypt"
     owner: "{{ admin }}"
   when: manifests.stat.exists == False
 
 - name: Copy templated issuer-staging
   template:
-    src: k8s_letsencrypt/manifests/issuer-staging.yaml
+    src: manifests/issuer-staging.yaml
     dest: "/home/{{ admin }}/k8s/letsencrypt"
     owner: "{{ admin }}"
 
 - name: Copy templated issuer-prod
   template:
-    src: k8s_letsencrypt/manifests/issuer-prod.yaml
+    src: manifests/issuer-prod.yaml
     dest: "/home/{{ admin }}/k8s/letsencrypt"
     owner: "{{ admin }}"
 

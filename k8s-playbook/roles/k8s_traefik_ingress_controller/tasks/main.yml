@@ -12,20 +12,20 @@
 
 - name: Copy manifest
   copy:
-    src: k8s_traefik_ingress_controller/manifests/
+    src: manifests/
     dest: "/home/{{ admin }}/k8s/traefik_ingress_controller"
     owner: "{{ admin }}"
   when: manifests.stat.exists == False
 
 - name: Copy templated secret
   template:
-    src: k8s_traefik_ingress_controller/manifests/auth_file.yaml
+    src: manifests/auth_file.yaml
     dest: "/home/{{ admin }}/k8s/traefik_ingress_controller"
     owner: "{{ admin }}"
 
 - name: Copy templated ingress
   template:
-    src: k8s_traefik_ingress_controller/manifests/ingress.yaml
+    src: manifests/ingress.yaml
     dest: "/home/{{ admin }}/k8s/traefik_ingress_controller"
     owner: "{{ admin }}"
 

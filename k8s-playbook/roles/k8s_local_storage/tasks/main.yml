@@ -11,7 +11,7 @@
 
 - name: Copy manifest
   copy:
-    src: k8s_local_storage/manifests/
+    src: manifests/
     dest: "/home/{{ admin }}/k8s/local_storage"
   when: manifests.stat.exists == False
 
