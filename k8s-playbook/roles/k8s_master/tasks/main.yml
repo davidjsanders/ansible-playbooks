@@ -35,7 +35,7 @@
 
 - name: Create kubeadm config
   template:
-    src: k8s_master/templates/kubeadm.config.j2
+    src: kubeadm.config.j2
     dest: /root/kubeadm.config
     owner: root
     group: root
