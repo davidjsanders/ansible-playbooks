@@ -3,6 +3,7 @@
   - master
   - workers
   become: true
+  any_errors_fatal: true
   tasks:
     - import_role:
         name: docker_engine

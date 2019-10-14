@@ -1,6 +1,7 @@
 - hosts:
   - master
   become: true
+  any_errors_fatal: true
   tasks:
     - import_role:
         name: app_nexus_oss
