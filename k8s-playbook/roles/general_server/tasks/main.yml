@@ -20,7 +20,7 @@
 - name: Set TimeZone to Toronto
   timezone:
     name: America/Toronto
-  when: ansible_date_time.tz in timezones
+  when: ansible_date_time.tz not in timezones
 
 - name: Disable swap
   shell: |
