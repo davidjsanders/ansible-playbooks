@@ -20,6 +20,7 @@
     force: yes
     update_cache: no
     dpkg_options: 'force-confold,force-confdef'
+  ignore_errors: true
   vars:
     packages:
     - jq

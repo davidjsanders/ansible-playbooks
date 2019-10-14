@@ -15,6 +15,7 @@
     force_apt_get: yes
     update_cache: yes
     dpkg_options: 'force-confold,force-confdef'
+  ignore_errors: true
 
 - name: Set TimeZone to Toronto
   timezone:
