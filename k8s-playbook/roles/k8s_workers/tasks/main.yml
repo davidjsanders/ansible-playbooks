@@ -5,7 +5,8 @@
   register: node_status
 
 - name: Join the cluster
-  shell: "{{ hostvars['master']['JOIN_COMMAND'].stdout }}"
+  shell: "{{ hostvars[item]['JOIN_COMMAND'].stdout }}"
+  with_items: "{{ groups['master'] }}"
   when: node_status is failed
 
 # - name: Wait for worker to become ready
