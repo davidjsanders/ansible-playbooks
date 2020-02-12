@@ -4,10 +4,7 @@
     force_apt_get: yes
     update_cache: no
     dpkg_options: 'force-confold,force-confdef'
-  register: apt_status
-  until: apt_status|success
-  delay: 30
-  retries: 10
+  ignore_errors: false
   vars:
     packages:
     - nfs-common
