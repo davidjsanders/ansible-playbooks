@@ -15,6 +15,10 @@
     force_apt_get: yes
     update_cache: yes
     dpkg_options: 'force-confold,force-confdef'
+  register: apt_status
+  until: apt_status|success
+  delay: 6
+  retries: 10
   ignore_errors: true
 
 - name: Set TimeZone to Toronto
