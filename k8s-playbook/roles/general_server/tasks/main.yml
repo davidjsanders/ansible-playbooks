@@ -9,6 +9,9 @@
     group: root
     mode: '0644'
 
+- name: Wait for unattended upgrades
+  raw: systemd-run --property="After=apt-daily.service apt-daily-upgrade.service" --wait /bin/true
+
 - name: Update packages
   apt:
     upgrade: full
