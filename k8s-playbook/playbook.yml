@@ -1,6 +1,7 @@
 ---
 - import_playbook: general_server.yml
 - import_playbook: docker.yml
+- import_playbook: docker-config.yml
 - import_playbook: nfs-server.yml
 - import_playbook: nfs-clients.yml
 - import_playbook: prepare-k8s.yml

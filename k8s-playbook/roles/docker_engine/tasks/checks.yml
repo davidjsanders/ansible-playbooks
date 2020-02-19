@@ -22,8 +22,3 @@
   stat:
     path: /etc/docker
   register: docker_etc
-
-- name: Check /etc/docker/daemon_json exists
-  stat:
-    path: /etc/docker/daemon.json
-  register: daemon_json

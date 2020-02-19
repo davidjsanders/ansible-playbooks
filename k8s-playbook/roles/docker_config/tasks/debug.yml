@@ -1,0 +1,4 @@
+- name: Status of /etc/docker/daemon.json
+  debug:
+    var: daemon_json
+    verbosity: 2

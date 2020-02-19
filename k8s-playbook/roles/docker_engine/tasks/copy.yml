@@ -86,11 +86,3 @@
     state: directory
     owner: "root"
   when: docker_etc.stat.exists == False or (force is defined and force | lower == "yes")
-
-- name: Copy daemon.json
-  template:
-    src: daemon.json.j2
-    dest: /etc/docker/daemon.json
-    owner: root
-    group: root
-  when: daemon_json.stat.exists == False or (force is defined and force | lower == "yes")
