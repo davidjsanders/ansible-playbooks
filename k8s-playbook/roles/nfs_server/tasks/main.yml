@@ -12,6 +12,13 @@
     packages:
     - nfs-kernel-server
     - nfs-common
+
+- name: Add entry to NFS exports for k8s-master
+  replace:
+    path: /etc/exports
+    regexp: 'RPCMOUNTDOPTS="--manage-gids"'
+    replace: 'RPCMOUNTDOPTS="-p 32767' 
+
 - name: Get UUID for datadisk
   shell: |
     blkid | grep /dev/sdc1 | awk '{print $2}' | sed -e 's/UUID="\(.*\)\"/\1/'
