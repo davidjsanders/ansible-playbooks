@@ -13,7 +13,7 @@
     - nfs-kernel-server
     - nfs-common
 
-- name: Add entry to NFS exports for k8s-master
+- name: Set static mountd to port 32767
   replace:
     path: /etc/exports
     regexp: 'RPCMOUNTDOPTS="--manage-gids"'
