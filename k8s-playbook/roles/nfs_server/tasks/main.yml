@@ -16,7 +16,7 @@
 - name: Set static mountd to port 32767
   replace:
     path: /etc/exports
-    regexp: 'RPCMOUNTDOPTS="--manage-gids"'
+    regexp: '^(RPCMOUNTDOPTS="--manage-gids")/g'
     replace: 'RPCMOUNTDOPTS="-p 32767' 
 
 - name: Get UUID for datadisk
