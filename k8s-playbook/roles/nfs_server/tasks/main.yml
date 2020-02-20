@@ -15,9 +15,9 @@
 
 - name: Set static mountd to port 32767
   replace:
-    path: /etc/exports
-    regexp: '^(RPCMOUNTDOPTS="--manage-gids")/g'
-    replace: '\1RPCMOUNTDOPTS="-p 32767\2' 
+    path: /etc/default/nfs-kernel-server
+    regexp: 'manage-gids'
+    replace: 'port 32767' 
 
 - name: Get UUID for datadisk
   shell: |
