@@ -1,4 +1,3 @@
-handlers:
-  - name: restart NFS Server
-    service: name=nfs-server state=restarted
-    listen: "restart NFS Server"
+- name: restart NFS Server
+  service: name=nfs-server state=restarted
+  listen: "restart NFS Server"
