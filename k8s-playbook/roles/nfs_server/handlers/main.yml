@@ -1,3 +1,8 @@
 - name: restart NFS Server
   service: name=nfs-server state=restarted
   listen: "restart NFS Server"
+
+- name: Reboot NFS Server
+  reboot:
+    reboot_timeout: 600
+  listen: "Reboot NFS Server"
