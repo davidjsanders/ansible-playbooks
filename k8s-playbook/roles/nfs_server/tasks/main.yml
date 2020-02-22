@@ -19,6 +19,16 @@
     regexp: 'manage-gids'
     replace: 'port 32767' 
 
+- name: Insert NFS configuration into sysctl
+  blockinfile:
+    block: |
+      fs.nfs.nfs_callback_tcpport = 32764
+      fs.nfs.nlm_tcpport = 32768
+      fs.nfs.nlm_udpport = 32768
+    dest: /etc/sysctl.conf
+    backup: no
+    notify: "restart NFS Server"
+
 - name: Get UUID for datadisk
   shell: |
     blkid | grep /dev/sdc1 | awk '{print $2}' | sed -e 's/UUID="\(.*\)\"/\1/'
@@ -60,8 +70,9 @@
     line: /datadrive/export {{ hostvars[item]['ansible_facts']['eth0']['ipv4']['address'] }}(rw,async,no_root_squash,insecure,fsid=0,crossmnt,no_subtree_check)
   with_items:
     - "{{ groups['all'] }}"
+  notify: "restart NFS Server"
 
-- name: Restart NFS server
-  service:
-    name: nfs-kernel-server
-    state: restarted
+# - name: Restart NFS server
+#   service:
+#     name: nfs-kernel-server
+#     state: restarted
