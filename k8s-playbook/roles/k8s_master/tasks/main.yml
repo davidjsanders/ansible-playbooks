@@ -79,14 +79,14 @@
 
 - name: Get Calico
   get_url:
-    url: https://docs.projectcalico.org/v3.7/manifests/calico-policy-only.yaml
+    url: https://docs.projectcalico.org/manifests/calico-policy-only.yaml
     dest: /root/calico-policy-only.yaml
   when: calico_policy.stat.exists == False
 
 - name: Update Calico POD CIDR block
   replace:
     path: /root/calico-policy-only.yaml
-    regexp: "10.244.0.0/16"
+    regexp: "192.168.0.0/16"
     replace: "{{ KUBEADM_POD_SUBNET }}"
   when: calico_policy.stat.exists == False
 
@@ -96,7 +96,7 @@
 
 - name: Get Canal
   get_url:
-    url: https://docs.projectcalico.org/v3.7/manifests/canal.yaml
+    url: https://docs.projectcalico.org/manifests/canal.yaml
     dest: /root/canal.yaml
 
 - name: Update Canal POD CIDR block
