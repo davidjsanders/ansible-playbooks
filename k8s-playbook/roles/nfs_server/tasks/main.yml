@@ -39,7 +39,6 @@
     value: '32768'
     sysctl_file: /etc/sysctl.conf
     reload: yes
-  notify: "restart NFS Server"
 
 - name: Get UUID for datadisk
   shell: |
