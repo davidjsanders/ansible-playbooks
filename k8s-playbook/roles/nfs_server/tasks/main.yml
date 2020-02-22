@@ -20,11 +20,11 @@
     replace: 'port 32767' 
 
 - name: Set NFS Callback Support
-  sysctl:
-    name: fs.nfs.nfs_callback_tcpport
-    value: '32764'
-    sysctl_file: /etc/sysctl.conf
-    reload: no
+  template:
+    src: nfs-local.conf
+    dest: /etc/modprobe.d/nfs-local.conf
+    owner: root
+    group: root
 
 - name: Set NFS NLM TCP Port
   sysctl:
