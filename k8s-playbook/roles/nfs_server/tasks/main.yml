@@ -19,15 +19,27 @@
     regexp: 'manage-gids'
     replace: 'port 32767' 
 
-- name: Insert NFS configuration into sysctl
-  blockinfile:
-    block: |
-      fs.nfs.nfs_callback_tcpport = 32764
-      fs.nfs.nlm_tcpport = 32768
-      fs.nfs.nlm_udpport = 32768
-    dest: /etc/sysctl.conf
-    backup: no
-    notify: "restart NFS Server"
+- name: Set NFS Callback Support
+  sysctl:
+    name: fs.nfs.nfs_callback_tcpport
+    value: '32764'
+    sysctl_file: /etc/sysctl.conf
+    reload: no
+
+- name: Set NFS NLM TCP Port
+  sysctl:
+    name: fs.nfs.nlm_tcpport
+    value: '32768'
+    sysctl_file: /etc/sysctl.conf
+    reload: no
+
+- name: Set NFS NLM UDP Port
+  sysctl:
+    name: fs.nfs.nlm_udpport
+    value: '32768'
+    sysctl_file: /etc/sysctl.conf
+    reload: yes
+  notify: "restart NFS Server"
 
 - name: Get UUID for datadisk
   shell: |
