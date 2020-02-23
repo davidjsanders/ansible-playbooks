@@ -19,12 +19,12 @@
     regexp: 'manage-gids'
     replace: 'port 32767' 
 
-- name: Set NFS Callback Support
-  template:
-    src: nfs-local.conf
-    dest: /etc/modprobe.d/nfs-local.conf
-    owner: root
-    group: root
+# - name: Set NFS Callback Support
+#   template:
+#     src: nfs-local.conf
+#     dest: /etc/modprobe.d/nfs-local.conf
+#     owner: root
+#     group: root
 
 - name: Set NFS NLM TCP Port
   sysctl:
