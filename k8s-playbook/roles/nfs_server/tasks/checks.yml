@@ -1,7 +1,0 @@
-- name: Check if exports is already configured
-  lineinfile:
-    name: /etc/exports
-    line: "/datadrive/export"
-    state: present
-  check_mode: yes
-  register: exportSet

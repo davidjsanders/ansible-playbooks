@@ -4,17 +4,11 @@
     state: directory
     mode: '0777'
 
-- name: Make NFS share
-  file:
-    path: /datadrive/export
-    state: directory
-    mode: '0777'
-
 - name: Add entry to NFS exports for k8s-master
   lineinfile:
     path: /etc/exports
     line: /datadrive/export {{ hostvars[item]['ansible_facts']['eth0']['ipv4']['address'] }}(rw,async,no_root_squash,insecure,fsid=0,crossmnt,no_subtree_check)
+    state: present
   with_items:
     - "{{ groups['all'] }}"
-  when: (exportSet is false)
 #  notify: "restart NFS Server"
