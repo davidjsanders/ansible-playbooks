@@ -1,0 +1,14 @@
+- name: Wait for unattended upgrades
+  raw: systemd-run --property="After=apt-daily.service apt-daily-upgrade.service" --wait /bin/true
+
+- name: Install packages
+  apt:
+    name: "{{ packages }}"
+    force_apt_get: yes
+    update_cache: no
+    dpkg_options: 'force-confold,force-confdef'
+  ignore_errors: false
+  vars:
+    packages:
+    - nfs-kernel-server
+    - nfs-common
