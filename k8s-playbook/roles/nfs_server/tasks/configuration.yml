@@ -24,3 +24,4 @@
     value: '32768'
     sysctl_file: /etc/sysctl.conf
     reload: yes
+  register: reloaded_nfs
