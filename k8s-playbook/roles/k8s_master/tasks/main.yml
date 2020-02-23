@@ -20,7 +20,7 @@
 
 - name: Check Calico exists
   stat:
-    path: /root/calico-policy-only.yaml
+    path: /root/calico.yaml
   register: calico_policy
 
 - name: Generate token
@@ -79,35 +79,52 @@
 
 - name: Get Calico
   get_url:
-    url: https://docs.projectcalico.org/manifests/calico-policy-only.yaml
-    dest: /root/calico-policy-only.yaml
+    url: https://docs.projectcalico.org/manifests/calico.yaml
+    dest: /root/calico.yaml
   when: calico_policy.stat.exists == False
 
 - name: Update Calico POD CIDR block
   replace:
-    path: /root/calico-policy-only.yaml
+    path: /root/calico.yaml
     regexp: "192.168.0.0/16"
     replace: "{{ KUBEADM_POD_SUBNET }}"
   when: calico_policy.stat.exists == False
 
 - name: Apply Calico
   shell: |
-    kubectl apply -f /root/calico-policy-only.yaml
+    kubectl apply -f /root/calico.yaml
 
-- name: Get Canal
-  get_url:
-    url: https://docs.projectcalico.org/manifests/canal.yaml
-    dest: /root/canal.yaml
+# - name: Get Calico
+#   get_url:
+#     url: https://docs.projectcalico.org/manifests/calico-policy-only.yaml
+#     dest: /root/calico-policy-only.yaml
+#   when: calico_policy.stat.exists == False
 
-- name: Update Canal POD CIDR block
-  replace:
-    path: /root/canal.yaml
-    regexp: "10.244.0.0/16"
-    replace: "{{ KUBEADM_POD_SUBNET }}"
+# - name: Update Calico POD CIDR block
+#   replace:
+#     path: /root/calico-policy-only.yaml
+#     regexp: "192.168.0.0/16"
+#     replace: "{{ KUBEADM_POD_SUBNET }}"
+#   when: calico_policy.stat.exists == False
 
-- name: Apply Canal
-  shell: |
-    kubectl apply -f /root/canal.yaml
+# - name: Apply Calico
+#   shell: |
+#     kubectl apply -f /root/calico-policy-only.yaml
+
+# - name: Get Canal
+#   get_url:
+#     url: https://docs.projectcalico.org/manifests/canal.yaml
+#     dest: /root/canal.yaml
+
+# - name: Update Canal POD CIDR block
+#   replace:
+#     path: /root/canal.yaml
+#     regexp: "10.244.0.0/16"
+#     replace: "{{ KUBEADM_POD_SUBNET }}"
+
+# - name: Apply Canal
+#   shell: |
+#     kubectl apply -f /root/canal.yaml
 
 - name: Create join command
   shell: |
