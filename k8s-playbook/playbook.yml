@@ -8,4 +8,4 @@
 - import_playbook: master-k8s.yml
 - import_playbook: workers-k8s.yml
 - import_playbook: setup-k8s.yml
-# - import_playbook: preload-apps-k8s.yml
+- import_playbook: preload-apps-k8s.yml
