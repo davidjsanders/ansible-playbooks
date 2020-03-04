@@ -1,38 +1,10 @@
-- name: Check manifest exists
-  stat:
-    path: "/home/{{ admin }}/k8s/letsencrypt"
-  register: manifests
-
-- name: Copy manifest
-  copy:
-    src: manifests/
-    dest: "/home/{{ admin }}/k8s/letsencrypt"
-    owner: "{{ admin }}"
-  when: manifests.stat.exists == False
-
-- name: Copy templated issuer-staging
-  template:
-    src: manifests/issuer-staging.yaml
-    dest: "/home/{{ admin }}/k8s/letsencrypt"
-    owner: "{{ admin }}"
-
-- name: Copy templated issuer-prod
-  template:
-    src: manifests/issuer-prod.yaml
-    dest: "/home/{{ admin }}/k8s/letsencrypt"
-    owner: "{{ admin }}"
-
 - name: Create namespace
   shell: |
-    kubectl apply -f /home/{{ admin }}/k8s/letsencrypt/namespace.yaml
+    kubectl create namespace cert-manager
 
-- name: Disable resource validation on cert-manager
+- name: Fetch and apply cert-manager
   shell: |
-    kubectl label namespace cert-manager certmanager.k8s.io/disable-validation=true
-
-- name: Apply CustomResourceDefinitions and cert-manager
-  shell: |
-    kubectl apply -f /home/{{ admin }}/k8s/letsencrypt/cert-manager-0.10.0.yaml
+    kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.13.1/cert-manager.yaml
 
 - name: Make sure cert-manager is running (up to 10min.)
   shell: kubectl get pods --namespace cert-manager --field-selector status.phase!="Running"
@@ -40,8 +12,3 @@
   until: result.stderr.find("No resources found") != -1
   retries: 60
   delay: 10
-
-- name: Create certificate issuers
-  shell: |
-    kubectl apply -f /home/{{ admin }}/k8s/letsencrypt/issuer-staging.yaml
-    kubectl apply -f /home/{{ admin }}/k8s/letsencrypt/issuer-prod.yaml
