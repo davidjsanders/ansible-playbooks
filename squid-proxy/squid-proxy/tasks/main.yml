@@ -11,3 +11,17 @@
   vars:
     packages:
     - squid
+
+- name: Copy original Squid configuration
+  copy:
+    src: /etc/squid/squid.conf
+    dest: /etc/squid/squid.conf.orginal
+    remote_src: yes
+    mode: '0444'
+
+- name: Template squid configuration
+  template:
+    src: templates/squid.conf.j2
+    dest: /etc/squid/squid.conf
+    owner: root
+    group: root
