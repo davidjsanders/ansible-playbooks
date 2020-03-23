@@ -4,6 +4,9 @@
 - hosts: jumpboxes
   become: true
   any_errors_fatal: true
+  handlers:
+    - include: handlers/main.yml
+      static: yes
   tasks:
     - import_role:
         name: general_server
