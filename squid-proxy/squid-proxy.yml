@@ -4,8 +4,6 @@
 - hosts: jumpboxes
   become: true
   any_errors_fatal: true
-  handlers:
-    - import_tasks: squid-proxy/handlers/main.yml
   tasks:
     - import_role:
         name: general_server
