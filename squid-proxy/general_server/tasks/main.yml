@@ -1,0 +1,30 @@
+- import_tasks: checks.yml
+- import_tasks: debug.yml
+
+- name: Wait for unattended upgrades
+  raw: systemd-run --property="After=apt-daily.service apt-daily-upgrade.service" --wait /bin/true
+
+- name: Update packages
+  apt:
+    upgrade: full
+    force_apt_get: yes
+    update_cache: yes
+    dpkg_options: 'force-confold,force-confdef'
+  ignore_errors: false
+
+- name: Set TimeZone to Toronto
+  timezone:
+    name: America/Toronto
+  when: ansible_date_time.tz not in timezones
+
+- name: Disable swap
+  shell: |
+    swapoff -a
+  when: swap_status.stdout != "0B"
+
+- name: Disable SWAP in fstab
+  replace:
+    path: /etc/fstab
+    regexp: '^(.+?\sswap\s+sw\s+.*)$'
+    replace: '# \1'
+

@@ -1,0 +1,2 @@
+---
+- import_playbook: general_server.yml
