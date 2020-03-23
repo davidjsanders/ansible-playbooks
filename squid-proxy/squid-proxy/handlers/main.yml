@@ -1,0 +1,3 @@
+- name: Restart Squid
+  service: name=squid state=restarted
+  listen: "Restart Squid"

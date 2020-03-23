@@ -25,3 +25,4 @@
     dest: /etc/squid/squid.conf
     owner: root
     group: root
+  notify: "Restart Squid"
