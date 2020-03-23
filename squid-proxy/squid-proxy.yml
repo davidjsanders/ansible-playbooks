@@ -5,7 +5,7 @@
   become: true
   any_errors_fatal: true
   handlers:
-    - include: handlers/main.yml
+    - include: squid-proxy/handlers/main.yml
       static: yes
   tasks:
     - import_role:
