@@ -7,4 +7,7 @@
   tasks:
     - import_role:
         name: general_server
-      tags: general_server
+      tags: squid_proxy
+    - import_role:
+        name: squid-proxy
+      tags: squid_proxy

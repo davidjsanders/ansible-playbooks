@@ -1,2 +1,2 @@
 ---
-- import_playbook: general_server.yml
+- import_playbook: squid-proxy.yml
