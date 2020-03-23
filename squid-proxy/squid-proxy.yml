@@ -4,10 +4,6 @@
 - hosts: jumpboxes
   become: true
   any_errors_fatal: true
-  handlers:
-    - import_role:
-        name: squid-proxy
-      tags: squid-proxy
   tasks:
     - import_role:
         name: general_server
