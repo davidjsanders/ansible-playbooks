@@ -15,7 +15,7 @@
 - name: Copy original Squid configuration
   copy:
     src: /etc/squid/squid.conf
-    dest: /etc/squid/squid.conf.orginal
+    dest: /etc/squid/squid.conf.original
     remote_src: yes
     mode: '0444'
 

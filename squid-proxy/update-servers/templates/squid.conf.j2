@@ -1,0 +1,6 @@
+http_port 8080
+visible_hostname jumpbox
+acl master_subnet src {{ master_subnet }}
+acl workers_subnet src {{ workers_subnet }}
+http_access allow master_subnet
+http_access allow workers_subnet
