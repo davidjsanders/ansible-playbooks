@@ -1,7 +1,9 @@
 ---
 # Setup hosts, update packages, set date & time and
 # disable swap.
-- hosts: jumpboxes
+- hosts:
+    - masters
+    - workers
   become: true
   any_errors_fatal: true
   tasks:

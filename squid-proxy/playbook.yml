@@ -1,2 +1,3 @@
 ---
 - import_playbook: squid-proxy.yml
+- import_playbook: server-setup.yml
