@@ -8,7 +8,7 @@
   any_errors_fatal: true
   tasks:
     - import_role:
-        name: update-servers
+        name: setup-proxy
       tags: server_setup
     - import_role:
         name: general_server
