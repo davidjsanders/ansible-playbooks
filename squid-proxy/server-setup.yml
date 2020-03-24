@@ -13,3 +13,6 @@
     - import_role:
         name: general_server
       tags: server_setup
+    - name: reboot server
+      reboot:
+        reboot_timeout: 600
